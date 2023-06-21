@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/api/items', async (req, res) => {
+app.get('/item/get', async (req, res) => {
   try {
     const data = await getData();
     res.json(data);
@@ -17,9 +17,9 @@ app.get('/api/items', async (req, res) => {
   }
 });
 
-app.post('/api/items', async (req, res) => {
+app.post('/item/new', async (req, res) => {
   try {
-    const { data } = req.body;
+    const data = req.body;
     await insertData(data);
     res.json({ message: 'Data inserted successfully!' });
   } catch (error) {
