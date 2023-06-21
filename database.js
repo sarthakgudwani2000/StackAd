@@ -1,4 +1,6 @@
 const connectToDatabase = require('./connectToDatabase');
+const mongoose = require('mongoose'); 
+const { Types } = require('mongoose');
 
 async function getData() {
   try {
@@ -28,7 +30,10 @@ async function insertData(data) {
     if (!itemsCollection) {
       throw new Error('Collection "items" not found');
     }
-    await itemsCollection.insertOne(data);
+
+    const newData = { ...data, _id: Types.ObjectId() };
+
+    await itemsCollection.insertOne(newData);
   } catch (error) {
     console.error('Error inserting data:', error);
     throw error;
